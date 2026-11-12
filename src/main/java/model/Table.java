@@ -23,6 +23,8 @@ public class Table {
         return listColumn;
     }
 
+    public String getName(){return name;}
+
     public void insert(Map<String, Object> values) {
         for (Column column : listColumn) {
             Object value = values.get(column.getNameColumn());
