@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
-
 public class Parser {
+    public String parse(String input) {
+        return input;
+    }
 }
