@@ -1,7 +1,7 @@
-import model.Column;
-import model.Row;
-import model.Table;
-import types.DataType;
+import main.java.model.Column;
+import main.java.model.Row;
+import main.java.model.Table;
+import main.java.types.DataType;
 
 void main() {
     Column col=new Column("id", DataType.INTEGER,true);
