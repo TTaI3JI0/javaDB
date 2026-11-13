@@ -1,4 +1,4 @@
-package Serializer;
+package serializer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -7,25 +7,26 @@ import model.Column;
 import model.Table;
 import model.Row;
 import types.DataType;
-import java.time.LocalDate;
 
-import java.util.List;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
 
 public class Serializer {
     private Object convertNumber(Object values,DataType type){
         if (values instanceof Long){
             Long number = (Long) values;
-            if(type==DataType.BOOLEAN){
-                return number.doubleValue();
-            }
             if (type == DataType.INTEGER){
-
                 if (number >= Integer.MIN_VALUE && number <= Integer.MAX_VALUE) {
                     return number.intValue();
                 }else {
                     throw new IllegalArgumentException(
                             "Число выходит за диапазон Integer");
                 }
+            }
+            if(type==DataType.DOUBLE){
+                return number.doubleValue();
             }
         }
         return values;
@@ -51,4 +52,14 @@ public class Serializer {
         }
         return tab;
     }
+    public void saveToFile(Table table,String path)throws IOException{
+        Path filepath=Path.of(path);
+        Files.writeString(filepath , serializeTable(table));
+
+    }
+    public Table readToFile(String path)throws IOException{
+        String json=Files.readString(Path.of(path));
+        return deserializeTable(json);
+    }
+
 }
