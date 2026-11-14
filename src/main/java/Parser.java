@@ -1,10 +1,15 @@
 import exceptions.DbException;
 
 public class Parser {
+    private final Database database;
+
+    public Parser(Database database) {
+        this.database = database;
+    }
     public String parse(String input) {
         if (input.contains("error")) {
-            throw new DbException("Тестовая ошибка базы данных!");
+            throw new DbException("Ошибка!");
         }
-        return "Парсер получил: " + input;
+        return input;
     }
 }
