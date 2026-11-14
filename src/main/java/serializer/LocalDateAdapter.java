@@ -1,5 +1,4 @@
-git status
-        package serializer;
+package serializer;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
