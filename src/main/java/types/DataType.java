@@ -17,6 +17,8 @@ public enum DataType {
 
             case STRING:
                 return value instanceof String;
+            case BOOLEAN:
+                return value instanceof Boolean;
             default:
                 return false;
         }
