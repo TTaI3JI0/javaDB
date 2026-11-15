@@ -1,22 +1,43 @@
 package model;
 
+import types.DataType;
+
+/**
+ * Описание столбца таблицы: имя, тип и признак первичного ключа.
+ */
 public class Column {
     private String name;
-    private types.DataType type;
+    private DataType type;
     private boolean primaryKey;
-    public Column(String name, types.DataType type, boolean primaryKey){
-        this.name=name;
-        this.type=type;
-        this.primaryKey=primaryKey;
+
+    /**
+     * @param name       имя столбца
+     * @param type       тип данных
+     * @param primaryKey является ли столбец первичным ключом
+     */
+    public Column(String name, DataType type, boolean primaryKey) {
+        this.name = name;
+        this.type = type;
+        this.primaryKey = primaryKey;
     }
-    public String getNameColumn(){
+
+    /** @return имя столбца */
+    public String getNameColumn() {
         return name;
     }
-    public types.DataType getTypeColumn(){
+
+    /** @return тип данных столбца */
+    public DataType getTypeColumn() {
         return type;
     }
-    public boolean isPrimKeyColumn(){
+
+    /** @return true, если столбец — первичный ключ */
+    public boolean isPrimKeyColumn() {
         return primaryKey;
     }
 
+    @Override
+    public String toString() {
+        return name + " " + type + (primaryKey ? " PRIMARY KEY" : "");
+    }
 }

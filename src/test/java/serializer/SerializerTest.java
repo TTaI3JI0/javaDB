@@ -108,4 +108,15 @@ class SerializerTest {
 
         assertNull(tab.getRow().get(0).getValue("id"));
     }
+
+    @Test
+    void dateRoundTripTest() {
+        Table table = new Table("events",
+                List.of(new Column("id", DataType.INTEGER, true),
+                        new Column("day", DataType.DATE, false)),
+                List.of(new Row(Map.of("id", 1, "day", java.time.LocalDate.of(2026, 11, 15)))));
+        Serializer serializer = new Serializer();
+        Table tab = serializer.deserializeTable(serializer.serializeTable(table));
+        assertEquals(java.time.LocalDate.of(2026, 11, 15), tab.getRow().get(0).getValue("day"));
+    }
 }

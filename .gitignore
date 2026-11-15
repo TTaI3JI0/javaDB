@@ -1,3 +1,9 @@
+### Maven ###
+target/
+
+### Данные СУБД ###
+data/
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
