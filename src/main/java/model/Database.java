@@ -1,4 +1,5 @@
-import model.Table;
+package model;
+
 import exceptions.DbException;
 import java.util.HashMap;
 import java.util.Map;
