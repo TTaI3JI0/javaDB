@@ -1,9 +1,11 @@
-import model.Database;
-import parser.Parser;
 import model.Column;
+import model.Database;
 import model.Table;
+import parser.Parser;
 import types.DataType;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -11,9 +13,19 @@ public class Main {
 
         Database db = new Database();
 
+        ArrayList<Column> ownerColumns = new ArrayList<>();
+        ownerColumns.add(new Column("id", DataType.INTEGER, true));
+        ownerColumns.add(new Column("name", DataType.STRING, false));
+
+        Table owners = new Table("owners", ownerColumns, new ArrayList<>());
+
+        db.addTable("owners", owners);
+
         ArrayList<Column> columns = new ArrayList<>();
         columns.add(new Column("id", DataType.INTEGER, true));
         columns.add(new Column("brand", DataType.STRING, false));
+
+        columns.add(new Column("owner_id", DataType.INTEGER, false));
 
         Table carsTable = new Table("cars", columns, new ArrayList<>());
         db.addTable("cars", carsTable);

@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 import java.util.Map;
 import java.util.Iterator;
+import exceptions.DbException;
 
 public class Table {
     private String name;
@@ -29,10 +30,10 @@ public class Table {
         for (Column column : listColumn) {
             Object value = values.get(column.getNameColumn());
             if (value == null) {
-                return;
+                throw new exceptions.DbException("Ошибка INSERT: пропущено значение для колонки " + column.getNameColumn());
             }
             if (!column.getTypeColumn().isValid(value)) {
-                return;
+                throw new exceptions.DbException("Ошибка INSERT: неверный тип данных для колонки " + column.getNameColumn());
             }
             if (column.isPrimKeyColumn()) {
                 String keyName = column.getNameColumn();
@@ -40,7 +41,7 @@ public class Table {
                 for (Row row : listRow) {
                     Object existingKey = row.getValue(keyName);
                     if (keyValue.equals(existingKey)) {
-                        return;
+                        throw new exceptions.DbException("Ошибка INSERT: дубликат первичного ключа " + keyValue);
                     }
                 }
             }
@@ -101,6 +102,11 @@ public class Table {
             }
         }
     }
+
+    public void remove(Row row) {
+        listRow.remove(row);
+    }
+
     public Iterator<Row> iterator(){
         return listRow.iterator();
     }
